@@ -16,6 +16,19 @@ class DomainForm
                 TextInput::make('name')
                     ->required(),
                 TextInput::make('description'),
+                Select::make('id_customer')
+                    ->label('Customer')
+                    ->relationship('customer', 'name')
+                    ->searchable()
+                    ->preload()
+                    ->createOptionForm([
+                        TextInput::make('name')->required(),
+                        TextInput::make('partita_iva'),
+                        TextInput::make('referente'),
+                        TextInput::make('telefono'),
+                        TextInput::make('email'),
+                        TextInput::make('note'),
+                    ]),
                 Select::make('status')
                     ->options(
                         collect(DomainStatus::cases())

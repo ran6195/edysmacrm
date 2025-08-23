@@ -15,6 +15,11 @@ class Domain extends Model
         'status',
         'owner',
         'managed_by',
+        'id_customer',
     ];
-    // ...existing code...
+
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class, 'id_customer');
+    }
 }

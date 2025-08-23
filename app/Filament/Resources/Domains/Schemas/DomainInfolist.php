@@ -4,6 +4,7 @@ namespace App\Filament\Resources\Domains\Schemas;
 
 use Filament\Infolists\Components\TextEntry;
 use Filament\Schemas\Schema;
+use App\Enums\DomainStatus;
 
 class DomainInfolist
 {
@@ -13,7 +14,10 @@ class DomainInfolist
             ->components([
                 TextEntry::make('name'),
                 TextEntry::make('description'),
-                TextEntry::make('status'),
+                TextEntry::make('customer.name')
+                    ->label('Customer'),
+                TextEntry::make('status')
+                    ->formatStateUsing(fn($state) => ucfirst(str_replace('_', ' ', DomainStatus::from($state)->value))),
                 TextEntry::make('owner'),
                 TextEntry::make('managed_by'),
                 TextEntry::make('created_at')

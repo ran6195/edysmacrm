@@ -12,6 +12,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
 use App\Enums\DomainStatus;
+use Filament\Actions\DeleteAction;
 
 class DomainsTable
 {
@@ -20,8 +21,11 @@ class DomainsTable
         return $table
             ->columns([
                 TextColumn::make('name')
-                    ->searchable(),
+                    ->searchable()->sortable(),
                 TextColumn::make('description')
+                    ->searchable(),
+                TextColumn::make('customer.name')
+                    ->label('Customer')
                     ->searchable(),
                 TextColumn::make('status')
                     ->formatStateUsing(fn($state) => ucfirst(str_replace('_', ' ', DomainStatus::from($state)->value))),
@@ -44,10 +48,27 @@ class DomainsTable
             ])
             ->filters([
                 TrashedFilter::make(),
+                \Filament\Tables\Filters\SelectFilter::make('status')
+                    ->multiple()
+                    ->options(
+                        collect(DomainStatus::cases())
+                            ->mapWithKeys(fn($case) => [$case->value => ucfirst(str_replace('_', ' ', $case->value))])
+                            ->toArray()
+                    ),
             ])
             ->recordActions([
-                ViewAction::make(),
-                EditAction::make(),
+                ViewAction::make()
+                    ->label('')
+                    ->icon('heroicon-o-eye')
+                    ->tooltip('Visualizza'),
+                EditAction::make()
+                    ->label('')
+                    ->icon('heroicon-o-pencil')
+                    ->tooltip('Modifica'),
+                DeleteAction::make()
+                    ->label('')
+                    ->icon('heroicon-o-trash')
+                    ->tooltip('Elimina'),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
