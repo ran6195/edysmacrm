@@ -37,7 +37,6 @@ class DomainForm
                     )
                     ->default(DomainStatus::ACTIVE->value)
                     ->required(),
-                TextInput::make('owner'),
                 TextInput::make('managed_by'),
             ]);
     }

@@ -29,8 +29,6 @@ class DomainsTable
                     ->searchable(),
                 TextColumn::make('status')
                     ->formatStateUsing(fn($state) => ucfirst(str_replace('_', ' ', DomainStatus::from($state)->value))),
-                TextColumn::make('owner')
-                    ->searchable(),
                 TextColumn::make('managed_by')
                     ->searchable(),
                 TextColumn::make('created_at')
@@ -63,7 +61,7 @@ class DomainsTable
                     ->tooltip('Visualizza'),
                 EditAction::make()
                     ->label('')
-                    ->icon('heroicon-o-pencil')
+
                     ->tooltip('Modifica'),
                 DeleteAction::make()
                     ->label('')

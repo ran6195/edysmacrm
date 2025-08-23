@@ -13,7 +13,6 @@ class Domain extends Model
         'name',
         'description',
         'status',
-        'owner',
         'managed_by',
         'id_customer',
     ];

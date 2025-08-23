@@ -18,7 +18,6 @@ class DomainInfolist
                     ->label('Customer'),
                 TextEntry::make('status')
                     ->formatStateUsing(fn($state) => ucfirst(str_replace('_', ' ', DomainStatus::from($state)->value))),
-                TextEntry::make('owner'),
                 TextEntry::make('managed_by'),
                 TextEntry::make('created_at')
                     ->dateTime(),

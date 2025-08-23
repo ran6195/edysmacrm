@@ -19,7 +19,6 @@ class DomainsRelationManager extends RelationManager
             ->columns([
                 TextColumn::make('name')->searchable()->sortable(),
                 TextColumn::make('status')->searchable(),
-                TextColumn::make('owner')->searchable(),
             ])
             ->actions([
                 ViewAction::make()
